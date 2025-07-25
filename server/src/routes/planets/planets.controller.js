@@ -2,7 +2,7 @@ import { habitablePlanets } from '../../models/planets.model.js';
 import { AppError } from '../../utils/AppError.utils.js';
 
 
-function getAllPlanets(req, res, next) {
+function httpGetAllPlanets(req, res, next) {
     try {
     if (habitablePlanets && habitablePlanets.length > 0) {
         res.status(200).json({
@@ -22,5 +22,5 @@ function getAllPlanets(req, res, next) {
 }
 
     export{
-        getAllPlanets,
+       httpGetAllPlanets,
     };
