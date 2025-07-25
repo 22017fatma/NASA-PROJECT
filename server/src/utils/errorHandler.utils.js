@@ -1,6 +1,6 @@
 import { logErrorToFile } from "./logger.utils.js";
 
-function errorDev(err, res) {
+export function errorDev(err, res) {
     // In development, we want to show detailed error information
         logErrorToFile(err);
         if (err.isOperational) {
@@ -13,7 +13,7 @@ function errorDev(err, res) {
         }
 }
 
-function errorProd(err, res) {
+export function errorProd(err, res) {
     // In production, we want to hide detailed error information
    logErrorToFile(err);
         if (err.isOperational) {
@@ -29,7 +29,7 @@ function errorProd(err, res) {
         });
         }
 }
-function globalErrorHandler(err, req, res, next) {
+export function globalErrorHandler(err, req, res, next) {
     // Central error handling middleware
         err.statusCode = err.statusCode ?? 500;
         err.status = err.status ?? 'error';
@@ -38,9 +38,7 @@ function globalErrorHandler(err, req, res, next) {
         if (env === 'development') {
             return errorDev(err,res);
         } else {
-         return errorProd(err,res);
+            return errorProd(err,res);
         }
 }
-export {
-    globalErrorHandler, 
-};
+

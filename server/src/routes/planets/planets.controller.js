@@ -1,5 +1,5 @@
 import { habitablePlanets } from '../../models/planets.model.js';
-import { AppError } from '../../utils/AppErorr.utils.js';
+import { AppError } from '../../utils/AppError.utils.js';
 
 
 function getAllPlanets(req, res, next) {

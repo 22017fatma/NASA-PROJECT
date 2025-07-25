@@ -3,7 +3,6 @@ import http from 'http';
 import { app } from './app.js';
 import { loadPlanetsData} from './models/planets.model.js';
 
-import { AppError } from '../utils/AppErorr.utils.js';
 
 
 console.log(' ENVIRONMENT:', process.env.NODE_ENV);

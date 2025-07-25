@@ -2,7 +2,7 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { AppError } from '../../utils/AppErorr.utils';
+import {AppError} from '../utils/AppError.utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,21 +13,7 @@ function isHabitablePlanet(planet) {
   return planet['koi_disposition'] === 'CONFIRMED'
     && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11
     && planet['koi_prad'] < 1.6;
-}
-
-// const promise = new Promise((resolve, reject) => {
-//   resolve(42);
-// });
-// promise.then((result) => {
-//   console.log(result);
-// });
-// async function run() {
-//   const result = await promise;
-//   console.log(result);
-// }
-// run();
-
-
+};
 
 
 function loadPlanetsData() {

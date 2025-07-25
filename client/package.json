@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+"build": "echo [1] Starting build... && react-scripts build && echo [2] Build finished. Checking and removing ../server/public if it exists... && if exist ..\\server\\public ( echo [3] Found ../server/public - Deleting... && rmdir /s /q ..\\server\\public ) else ( echo [3] ../server/public not found - skipping delete ) && echo [4] Now moving build to ../server/public... && move build ..\\server\\public && echo [5] ✅ Build folder moved to ../server/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,5 +39,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

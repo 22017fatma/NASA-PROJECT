@@ -20,7 +20,7 @@ function logErrorToFile(err) {
     if (error) {
     console.error('Failed to write to log file:', error);
     }
-});;
+});
 }
 
 
