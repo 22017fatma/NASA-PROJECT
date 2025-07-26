@@ -2,7 +2,6 @@
   "name": "nasa-project",
   "version": "1.0.0",
   "main": "index.js",
-
   "scripts": {
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
@@ -11,6 +10,7 @@
     "client": "cd ./client && npm start",
     "watch": "npm run server & npm run client",
     "test": "npm run test --prefix server && npm run test --prefix client"
+    
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "url": "https://github.com/22017fatma/NASA-PROJECT/issues"
   },
   "homepage": "https://github.com/22017fatma/NASA-PROJECT#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "morgan": "^1.10.1"
+  }
 }

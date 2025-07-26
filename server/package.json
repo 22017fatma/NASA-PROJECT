@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "watch": "nodemon src/server.js",
+  "watch": "nodemon --config nodemon.dev.json",
     "test": "echo \"Error: no test specified\" && exit 1"
+  
   },
   "keywords": [],
   "author": "",
