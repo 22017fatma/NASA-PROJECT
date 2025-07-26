@@ -6,14 +6,19 @@ const launch={
     mission: 'Kepler Exploration X',
     rocket: 'Explorer IS1',
     launchDate: new Date('December 27, 2030'),
-    distination: 'Kepler-442 b',
+    target: 'Kepler-442 b',
     customer:['ZTM','NASA'],
     upcoming: true,
     success: true,
 
 };
+
 // Initialize the map with the launch data
 launches.set(launch.flightNumber,launch);
+
+function existLaunchWithId(launchId){
+  return launch.has(launchId);
+}
 function getAllLaunches(){
     return Array.from(launches.values());
 
@@ -21,18 +26,26 @@ function getAllLaunches(){
 
 function addNewLaunch(launch){
   latestFlightNumber++;
-  launches.set(launches.flightNumber,
+  launches.set(latestFlightNumber,
     Object.assign(launch,{
+      flightNumber:latestFlightNumber,
       success:true,
       upcoming:true,
-      customer:['Zero to Mastry','NASA'],
-      flightNumber:latestFlightNumber,
-
+      customer:['ZTM','NASA'],
   })
 );
+}
+
+function abortLaunchById(launchId){
+ const aborted= launches.get(launchId);
+ aborted.upcoming = false;
+ aborted.success = false;
+ return aborted;
 }
 export{
     
   getAllLaunches,
-  addNewLaunch
+  addNewLaunch,
+  existLaunchWithId,
+  abortLaunchById
 };

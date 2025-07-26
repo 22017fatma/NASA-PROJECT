@@ -10,9 +10,9 @@ const __dirname = dirname(__filename);
 
 import{ planetsRouter } from './routes/planets/planets.router.js';
 import { launchesRouter } from './routes/launches/launches.router.js';
-import { AppError } from './utils/AppError.utils.js';
 import dotenv from 'dotenv';   
 import { globalErrorHandler } from './utils/errorHandler.utils.js';
+
 dotenv.config();
 const app = express();
 
@@ -34,8 +34,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,'..','public')));
 
 
-app.use('/api', planetsRouter);
-app.use('/api/launches',launchesRouter);
+app.use('/planets', planetsRouter);
+app.use('/launches',launchesRouter);
+
+
 
 
 app.get('/*route',(req,res)=>{
