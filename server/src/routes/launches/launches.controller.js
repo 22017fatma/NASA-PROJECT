@@ -5,44 +5,69 @@ import {
     existLaunchWithId,
     abortLaunchById
 } from "../../models/launches.model.js";
+
+import{isValidLaunch} from '../../../dots/launches.dots.js'
+
+
+
 function httpGetAllLaunches(req,res){ 
     return res.status(200).json({
         data:{
-      launches: getAllLaunches(),
+        launches: getAllLaunches(),
     },
 });
 }
-function httpAddNewLaunch(req,res){
-    const launch= req.body;
 
-    if(
-        !launch.mission ||
-        !launch.rocket ||
-        !launch.launchDate||
-        !launch.target
-        ){
-        return res.status(400).json({
-            error: 'missing required launch property',
-        })
-    }
-    launch.launchDate=new Date (launch.launchDate);
 
-//    if (new Date(launchDate).toString() === 'Invalid Date') {
-//   return res.status(400).json({
-//     error: 'Invalid launch date',
-//   });
-//     }
-// 
-    //valid date
-    if(isNaN(launch.launchDate)){
-        return res.status(400).json({
-            error: "Invalid launch date",
-        })
+function httpAddNewLaunch(req, res) {
+    const launch = req.body;
+
+    if (!isValidLaunch(launch)) {
+    return res.status(400).json({
+        error: 'Invalid launch ',
+    });
     }
 
+    launch.launchDate = new Date(launch.launchDate);
     addNewLaunch(launch);
-    res.status(201).json(launch);
+    return res.status(201).json(launch);
 }
+
+
+
+// function httpAddNewLaunch(req,res){
+//     const launch= req.body;
+
+//     if(
+//         !launch.mission ||
+//         !launch.rocket ||
+//         !launch.launchDate||
+//         !launch.target
+//         ){
+//         return res.status(400).json({
+//             error: 'missing required launch property',
+//         })
+//     }
+//     launch.launchDate=new Date (launch.launchDate);
+
+// //    if (new Date(launchDate).toString() === 'Invalid Date') {
+// //   return res.status(400).json({
+// //     error: 'Invalid launch date',
+// //   });
+// //     }
+// // 
+//     //valid date
+//     if(isNaN(launch.launchDate)){
+//         return res.status(400).json({
+//             error: "Invalid launch date",
+//         })
+//     }
+
+//     addNewLaunch(launch);
+//     res.status(201).json(launch);
+// }
+
+
 function httpAbortLaunch(req,res){
   const launchId=Number(req.params.id);
   //if launch doesn't exist

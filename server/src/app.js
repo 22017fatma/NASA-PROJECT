@@ -41,7 +41,7 @@ app.use('*route', (req, _res, _next) => {
     throw new AppError(`Can't find ${req.originalUrl} on this server!`, 404)
 });
 
-app.get('api/*route',(req,res)=>{
+app.get('/api/*route',(req,res)=>{
     res.sendFile(path.join(__dirname,'..','public','index.html'))
 });
 

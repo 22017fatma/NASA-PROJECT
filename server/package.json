@@ -6,21 +6,30 @@
   "scripts": {
     "start": "node src/server.js",
     "watch": "nodemon --config nodemon.dev.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "NASA Mission Control API",
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "cors": "^2.8.5",
     "csv-parse": "^6.1.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "morgan": "^1.10.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.5",
+    "cross-env": "^7.0.3",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
   }
+  
 }

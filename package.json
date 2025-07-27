@@ -2,6 +2,7 @@
   "name": "nasa-project",
   "version": "1.0.0",
   "main": "index.js",
+  
   "scripts": {
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
@@ -9,7 +10,7 @@
     "server": "cd ./server && npm run watch",
     "client": "cd ./client && npm start",
     "watch": "npm run server & npm run client",
-    "test": "npm run test --prefix server && npm run test --prefix client"
+    "test": "npm test test --prefix server && npm test test --prefix client"
     
   },
   "repository": {
