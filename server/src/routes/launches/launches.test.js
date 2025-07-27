@@ -69,3 +69,30 @@ describe('Test POST /api/launches', () => {
     });
   });
 });
+escribe('Test DELETE /api/launches/:id', () => {
+  test('It should respond with 200 if launch aborted successfully', async () => {
+    const launchIdToAbort = 100;
+
+    const response = await request(app)
+      .delete(`/api/launches/${launchIdToAbort}`)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body).toStrictEqual({
+      ok: true,
+    });
+  });
+
+  test('It should respond with 404 if launch not found', async () => {
+    const invalidLaunchId = 9999;
+
+    const response = await request(app)
+      .delete(`/api/launches/${invalidLaunchId}`)
+      .expect('Content-Type', /json/)
+      .expect(400);
+
+    expect(response.body).toStrictEqual({
+      error: 'Launch not found',
+    });
+  });
+});
