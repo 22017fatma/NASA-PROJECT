@@ -3,6 +3,7 @@ import { AppError } from '../../utils/AppError.utils.js';
 
 
 function httpGetAllPlanets(req, res, next) {
+    console.log("httpGetAllPlanets");
     try {
     if (habitablePlanets && habitablePlanets.length > 0) {
         res.status(200).json({
