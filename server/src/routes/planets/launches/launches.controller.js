@@ -1,10 +1,9 @@
-import { launchesModel } from "../../../models/launches.model.js";
+const { launchesModel } = require("../../../models/launches.model");
 
-function httpGetAllLaunches(req,res){ 
-    return res.status(200).json(launchesModel.getAllLaunches());
-
+function httpGetAllLaunches(req, res) {
+  return res.status(200).json(launchesModel.getAllLaunches());
 }
 
-export{
-    httpGetAllLaunches,
-}
+module.exports = {
+  httpGetAllLaunches,
+};

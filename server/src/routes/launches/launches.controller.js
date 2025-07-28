@@ -1,39 +1,33 @@
+const {
+  getAllLaunches,
+  addNewLaunch,
+  existLaunchWithId,
+  abortLaunchById,
+} = require("../../models/launches.model.js");
 
-import { 
-    getAllLaunches ,
-    addNewLaunch,
-    existLaunchWithId,
-    abortLaunchById
-} from "../../models/launches.model.js";
+const { isValidLaunch } = require("../../../dtos/launches.dtos.js");
 
-import{isValidLaunch} from '../../../dots/launches.dots.js'
-
-
-
-function httpGetAllLaunches(req,res){ 
-    return res.status(200).json({
-        data:{
-        launches: getAllLaunches(),
+function httpGetAllLaunches(req, res) {
+  return res.status(200).json({
+    data: {
+      launches: getAllLaunches(),
     },
-});
+  });
 }
-
 
 function httpAddNewLaunch(req, res) {
-    const launch = req.body;
+  const launch = req.body;
 
-    if (!isValidLaunch(launch)) {
+  if (!isValidLaunch(launch)) {
     return res.status(400).json({
-        error: 'Invalid launch ',
+      error: "Invalid launch ",
     });
-    }
+  }
 
-    launch.launchDate = new Date(launch.launchDate);
-    addNewLaunch(launch);
-    return res.status(201).json(launch);
+  launch.launchDate = new Date(launch.launchDate);
+  addNewLaunch(launch);
+  return res.status(201).json(launch);
 }
-
-
 
 // function httpAddNewLaunch(req,res){
 //     const launch= req.body;
@@ -55,7 +49,7 @@ function httpAddNewLaunch(req, res) {
 // //     error: 'Invalid launch date',
 // //   });
 // //     }
-// // 
+// //
 //     //valid date
 //     if(isNaN(launch.launchDate)){
 //         return res.status(400).json({
@@ -67,23 +61,18 @@ function httpAddNewLaunch(req, res) {
 //     res.status(201).json(launch);
 // }
 
-
-function httpAbortLaunch(req,res){
-  const launchId=Number(req.params.id);
+function httpAbortLaunch(req, res) {
+  const launchId = Number(req.params.id);
   //if launch doesn't exist
-  if(!existLaunchWithId(launchId)){
-  return res.status(404).json({
-    error: "launch not found",
-  });
-}
-const aborted = abortLaunchById(launchId);
+  if (!existLaunchWithId(launchId)) {
+    return res.status(404).json({
+      error: "launch not found",
+    });
+  }
+  const aborted = abortLaunchById(launchId);
 
   //if launch does exist
   return res.status(200).json(aborted);
 }
 
-export{
-    httpGetAllLaunches,
-    httpAddNewLaunch ,
-    httpAbortLaunch,
-};
+module.exports = { httpGetAllLaunches, httpAddNewLaunch, httpAbortLaunch };
