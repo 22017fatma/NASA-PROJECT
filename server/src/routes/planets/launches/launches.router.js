@@ -1,12 +1,10 @@
-
-import express from 'express';
-import { httpGetAllLaunches } from './launches.controller.js';
+const express = require("express");
+const { httpGetAllLaunches } = require("./launches.controller");
 
 const launchesRouter = express.Router();
 
-launchesRouter.get('/launches', httpGetAllLaunches);
+launchesRouter.get("/launches", httpGetAllLaunches);
 
-
-export {
-    launchesRouter
+module.exports = {
+  launchesRouter,
 };
