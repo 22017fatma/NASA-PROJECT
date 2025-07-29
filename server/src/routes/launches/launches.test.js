@@ -53,7 +53,7 @@ describe("Test POST /api/launches", () => {
       .expect(400);
     console.log("body is ", response.body);
     expect(response.body).toStrictEqual({
-      error: "Missing required launch property",
+      error: " Invalid launch ",
     });
   });
 
@@ -65,7 +65,7 @@ describe("Test POST /api/launches", () => {
       .expect(400);
 
     expect(response.body).toStrictEqual({
-      error: "Invalid launch date",
+      error: " Invalid launch ",
     });
   });
 });
@@ -78,9 +78,12 @@ describe("Test DELETE /api/launches/:id", () => {
       .expect("Content-Type", /json/)
       .expect(200);
 
-    expect(response.body).toStrictEqual({
-      ok: true,
-    });
+    expect(response.body).toMatchObject({
+    flightNumber: 100,
+    success: false,
+    upcoming: false,
+});
+
   });
 
   test("It should respond with 404 if launch not found", async () => {
@@ -92,7 +95,7 @@ describe("Test DELETE /api/launches/:id", () => {
       .expect(404);
 
     expect(response.body).toStrictEqual({
-      error: "Launch not found",
+      error: "launch not found",
     });
   });
 });

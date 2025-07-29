@@ -10,9 +10,8 @@
     "client": "cd ./client && npm start",
     "watch": "npm run server & npm run client",
     "test": "npm test test --prefix server && npm test test --prefix client",
-    "deploy":"npm run build --prefix client && npm start --prefix server",
-    "deploy-cluster":"npm run build --prefix client && npm run cluster --prefix server"
-
+    "deploy": "npm run build --prefix client && npm start --prefix server",
+    "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix server"
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,8 @@
   "homepage": "https://github.com/22017fatma/NASA-PROJECT#readme",
   "description": "",
   "dependencies": {
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.16.5",
     "morgan": "^1.10.1",
     "pm2": "^6.0.8"
   }

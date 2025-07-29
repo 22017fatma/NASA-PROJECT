@@ -1,8 +1,12 @@
 function isValidStringField(value, minLength = 3, maxLength = 50) {
+  const trimmed = value.trim();
+
   return (
     typeof value === "string" &&
-    value.trim().length >= minLength &&
-    value.trim().length <= maxLength
+    trimmed.length >= minLength &&
+    trimmed.length <= maxLength &&
+    /^[a-zA-Z\s]+$/.test(trimmed) && 
+    !/^\d+$/.test(trimmed)           
   );
 }
 
