@@ -7,7 +7,8 @@ const {
 
 const { isValidLaunch } = require("../../../dtos/launches.dtos.js");
 
-function httpGetAllLaunches(req, res) {
+async function httpGetAllLaunches(req, res) {
+  
   return res.status(200).json({
     data: {
       launches: getAllLaunches(),

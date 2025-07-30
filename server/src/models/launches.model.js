@@ -1,3 +1,5 @@
+const launchesDatabase = require('./launches.mongo');
+
 const launches = new Map();
 let latestFlightNumber = 100;
 
@@ -11,9 +13,9 @@ const launch = {
   upcoming: true,
   success: true,
 };
-
+saveLuanches(launch);
 // Initialize the map with the launch data
-launches.set(launch.flightNumber, launch);
+// launches.set(launch.flightNumber, launch);
 
 function existLaunchWithId(launchId) {
   return launches.has(launchId);
@@ -21,6 +23,14 @@ function existLaunchWithId(launchId) {
 
 function getAllLaunches() {
   return Array.from(launches.values());
+}
+
+async function saveLuanches(launch){
+    await launchesDatabase.updateOne({
+      flightNumber: launch.flightNumber,
+    }, launch, {
+      upsert: true,
+    });
 }
 
 function addNewLaunch(launch) {

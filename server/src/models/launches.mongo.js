@@ -8,7 +8,7 @@ const launchesSchema = new mongoose.Schema({
     default: 100,
     },   
     launchDate:{ 
-        ype: Date,
+        type: Date,
         required: true,
     },
     mission:{
@@ -36,3 +36,5 @@ const launchesSchema = new mongoose.Schema({
 
 
 });
+//connect launchSchema with "launches" Collection
+module.exports = mongoose.model("launch", launchesSchema);

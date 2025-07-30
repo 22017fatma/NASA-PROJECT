@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse");
 const { AppError } = require("../utils/AppError.utils");
-
+const planets = require('./planets.mongo');
+const { get } = require("mongoose");
 
 const habitablePlanets = [];
 
@@ -34,23 +35,48 @@ function loadPlanetsData() {
           columns: true,
         })
       )
-      .on("data", (data) => {
-        if (isHabitablePlanet(data)) {
-          habitablePlanets.push(data);
+      .on("data", async (data) => {
+        if (isHabitablePlanet(data))
+       {
+          //TODO:Replace below creat with insert + update = upsert
+          savePlenets(data);
+          //Creat Decument in DB
         }
       })
       .on("error", (err) => {
         reject(new AppError("Failed to parse CSV file", 500, err));
       })
-      .on("end", () => {
-        console.log(habitablePlanets.map((planet) => planet["kepler_name"]));
-        console.log(`${habitablePlanets.length} habitable planets found!`);
+      .on("end", async () => {
+        const countPlanetsFound= (await getAllPlanets()).length;
+        // console.log(habitablePlanets.map((planet) => planet["kepler_name"]));
+        console.log(`${countPlanetsFound} habitable planets found!`);
         resolve();
       });
   });
 }
 
+  async function getAllPlanets(){
+  return await planets.find({}, {
+    '__id': 0,
+    '__v': 0,
+  });
+}
+async function savePlenets(planet){
+  try{
+          //TODO:Replace below creat with insert + update = upsert
+          await planets.updateOne({
+            keplerName: data.kepler_name,
+          }, {
+            upsert: true,
+          });
+        
+    }catch(err){
+          console.err(`could not save planet ${err}`)
+      }
+    }
+
 module.exports = {
   habitablePlanets,
   loadPlanetsData,
+  getAllPlanets,
 };

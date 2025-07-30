@@ -5,8 +5,7 @@ function isValidStringField(value, minLength = 3, maxLength = 50) {
     typeof value === "string" &&
     trimmed.length >= minLength &&
     trimmed.length <= maxLength &&
-    /^[a-zA-Z\s]+$/.test(trimmed) && 
-    !/^\d+$/.test(trimmed)           
+    /^[a-zA-Z0-9\s\-_.]+$/.test(trimmed)
   );
 }
 
