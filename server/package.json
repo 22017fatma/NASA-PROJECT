@@ -8,7 +8,9 @@
     "watch": "nodemon --config nodemon.dev.json",
     "test": "jest",
     "test-watch": "jest --watch",
-    "cluster": "pm2 start src/server.js -i max"
+    "cluster": "pm2 start src/server.js -i max",
+    "test:env": "cross-env NODE_ENV=test jest"
+
   },
   "keywords": [],
   "author": "",
@@ -24,10 +26,12 @@
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
     "reflect-metadata": "^0.2.2"
-  },
+  
+  },  
+  "jest": {
+      "testEnvironment": "node"
+    },
   "devDependencies": {
-    "@babel/preset-env": "^7.28.0",
-    "babel-jest": "^30.0.5",
     "cross-env": "^7.0.3",
     "jest": "^30.0.5",
     "supertest": "^7.1.4"

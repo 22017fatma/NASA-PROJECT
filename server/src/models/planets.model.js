@@ -37,7 +37,7 @@ function loadPlanetsData() {
       )
       .on("data", async (data) => {
         if (isHabitablePlanet(data))
-       {
+        {
           //TODO:Replace below creat with insert + update = upsert
           savePlenets(data);
           //Creat Decument in DB
@@ -57,7 +57,6 @@ function loadPlanetsData() {
 
   async function getAllPlanets(){
   return await planets.find({}, {
-    '__id': 0,
     '__v': 0,
   });
 }
@@ -65,13 +64,15 @@ async function savePlenets(planet){
   try{
           //TODO:Replace below creat with insert + update = upsert
           await planets.updateOne({
-            keplerName: data.kepler_name,
+          keplerName: planet.kepler_name,
+          }, {
+          keplerName: planet.kepler_name,
           }, {
             upsert: true,
           });
         
     }catch(err){
-          console.err(`could not save planet ${err}`)
+          console.error(`could not save planet ${err}`)
       }
     }
 

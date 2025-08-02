@@ -1,6 +1,20 @@
 const { app } = require("../../app.js");
 const request = require("supertest");
+const {
+  connectToMongo,
+  mongoDisconnect,
+} = require("../../services/mongo.js");
 
+
+
+describe("Launches API", ()=>{
+  beforeAll(async ()=>{
+    await connectToMongo();
+  }, 60000);
+
+  afterAll(async()=>{
+    await mongoDisconnect();
+  })
 describe("Test GET /api/launches", () => {
   test("It should respond with 200 success", async () => {
     const response = await request(app)
@@ -12,22 +26,23 @@ describe("Test GET /api/launches", () => {
 
 describe("Test POST /api/launches", () => {
   const completeLaunchData = {
+    
     mission: "USS Enterprise",
     rocket: "NCC 1701-D",
-    target: "Kepler-186 f",
+    target: "Kepler-62 f",
     launchDate: "January 4, 2028",
   };
 
   const launchDataWithoutDate = {
     mission: "USS Enterprise",
     rocket: "NCC 1701-D",
-    target: "Kepler-186 f",
+    target: "Kepler-62 f",
   };
 
   const launchDataWithInvalidDate = {
     mission: "USS Enterprise",
     rocket: "NCC 1701-D",
-    target: "Kepler-186 f",
+    target: "Kepler-62 f",
     launchDate: "zoot",
   };
 
@@ -86,16 +101,17 @@ describe("Test DELETE /api/launches/:id", () => {
 
   });
 
-  test("It should respond with 404 if launch not found", async () => {
+  test("It should respond with 400 if launch not found", async () => {
     const invalidLaunchId = 9999;
 
     const response = await request(app)
       .delete(`/api/launches/${invalidLaunchId}`)
       .expect("Content-Type", /json/)
-      .expect(404);
+      .expect(400);
 
     expect(response.body).toStrictEqual({
       error: "launch not found",
     });
   });
+});
 });

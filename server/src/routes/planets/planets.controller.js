@@ -1,14 +1,14 @@
 const { habitablePlanets } = require("../../models/planets.model");
 const { AppError } = require("../../utils/AppError.utils");
 
-function httpGetAllPlanets(req, res, next) {
+async function httpGetAllPlanets(req, res, next) {
   console.log("httpGetAllPlanets");
   try {
     if (habitablePlanets && habitablePlanets.length > 0) {
       res.status(200).json({
         status: "success",
         data: {
-          planets: habitablePlanets,
+          planets: await habitablePlanets,
         },
       });
     } else {
