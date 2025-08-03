@@ -6,11 +6,10 @@
   "scripts": {
     "start": "node src/server.js",
     "watch": "nodemon --config nodemon.dev.json",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test-watch": "jest --watch",
     "cluster": "pm2 start src/server.js -i max",
     "test:env": "cross-env NODE_ENV=test jest"
-
   },
   "keywords": [],
   "author": "",
@@ -23,14 +22,14 @@
     "csv-parse": "^6.1.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "mongoose": "^8.17.0",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
     "reflect-metadata": "^0.2.2"
-  
-  },  
+  },
   "jest": {
-      "testEnvironment": "node"
-    },
+    "testEnvironment": "node"
+  },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "jest": "^30.0.5",

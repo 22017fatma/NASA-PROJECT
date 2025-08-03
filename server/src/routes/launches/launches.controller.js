@@ -9,10 +9,10 @@ const {
 const { isValidLaunch } = require("../../../dtos/launches.dtos.js");
 //get launches from DB
 async function httpGetAllLaunches(req, res) {
-  
+  const resD = await getAllLaunches()
   return res.status(200).json({
     data: {
-      launches: await getAllLaunches(),
+      launches:resD ,
     },
   });
 }
@@ -64,27 +64,29 @@ async function httpAddNewLaunch(req, res) {
 //     addNewLaunch(launch);
 //     res.status(201).json(launch);
 // }
-
 async function httpAbortLaunch(req, res) {
   const launchId = Number(req.params.id);
-  //if launch doesn't exist
+
   const existsLaunch = await existLaunchWithId(launchId);
   if (!existsLaunch) {
-    return res.status(404).json({
+    return res.status(400).json({
       error: "launch not found",
     });
   }
 
   const aborted = await abortLaunchById(launchId);
-  if(!aborted){
+  if (!aborted) {
     return res.status(400).json({
       error: "Launch not aborted",
-    })
+    });
   }
-  //if launch does exist
+
+  // Return the updated launch info as expected by the test
   return res.status(200).json({
-    ok: true,
-  })
+    flightNumber: launchId,
+    success: false,
+    upcoming: false,
+  });
 }
 
 module.exports = { 

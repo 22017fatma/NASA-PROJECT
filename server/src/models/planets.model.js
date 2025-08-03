@@ -17,10 +17,11 @@ function isHabitablePlanet(planet) {
 }
 
 function loadPlanetsData() {
+  console.log("loadPlanetsData ")
   return new Promise((resolve, reject) => {
     const filePath = path.join(
       __dirname,
-      "..",
+      "..", 
       "..",
       "data",
       "kepler_data.csv"

@@ -35,6 +35,8 @@ async function getAllLaunches() {
 
 
 async function saveLuanches(launch){
+
+  console.log("saveLuanches")
   //validate the planet
   const planet = await planets.findOne({
     keplerName: launch.target,
