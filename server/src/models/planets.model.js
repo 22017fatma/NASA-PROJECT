@@ -3,7 +3,6 @@ const path = require("path");
 const { parse } = require("csv-parse");
 const { AppError } = require("../utils/AppError.utils");
 const planets = require('./planets.mongo');
-const { get } = require("mongoose");
 
 const habitablePlanets = [];
 
