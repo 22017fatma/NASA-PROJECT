@@ -5,10 +5,9 @@ const path = require("path");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 
-const { planetsRouter } = require("./routes/planets/planets.router");
-const { launchesRouter } = require("./routes/launches/launches.router");
 const { globalErrorHandler } = require("./utils/errorHandler.utils");
 
+const api = require ("./routes/api");
 dotenv.config();
 
 const app = express();
@@ -24,14 +23,15 @@ app.use(
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use("/api/planets", planetsRouter);
-app.use("/api/launches", launchesRouter);
+app.use("/v1",api);
+
+
 
 app.use("*route", (req, _res, _next) => {
   throw new Error(`Can't find ${req.originalUrl} on this server!`, 404);
 });
 
-app.get("/api/*route", (req, res) => {
+app.get("/*route", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 

@@ -15,16 +15,16 @@ describe("Launches API", ()=>{
   afterAll(async()=>{
     await mongoDisconnect();
   })
-describe("Test GET /api/launches", () => {
+describe("Test GET /v1/launches", () => {
   test("It should respond with 200 success", async () => {
     const response = await request(app)
-      .get("/api/launches")
+      .get("/v1/launches")
       .expect("Content-Type", /json/)
       .expect(200);
   });
 });
 
-describe("Test POST /api/launches", () => {
+describe("Test POST /v1/launches", () => {
   const completeLaunchData = {
     
     mission: "USS Enterprise",
@@ -48,7 +48,7 @@ describe("Test POST /api/launches", () => {
 
   test("It should respond with 201 created", async () => {
     const response = await request(app)
-      .post("/api/launches")
+      .post("/v1/launches")
       .send(completeLaunchData)
       .expect("Content-Type", /json/)
       .expect(201);
@@ -62,7 +62,7 @@ describe("Test POST /api/launches", () => {
 
   test("It should catch missing required properties", async () => {
     const response = await request(app)
-      .post("/api/launches")
+      .post("/v1/launches")
       .send(launchDataWithoutDate)
       .expect("Content-Type", /json/)
       .expect(400);
@@ -74,7 +74,7 @@ describe("Test POST /api/launches", () => {
 
   test("It should catch invalid dates", async () => {
     const response = await request(app)
-      .post("/api/launches")
+      .post("/v1/launches")
       .send(launchDataWithInvalidDate)
       .expect("Content-Type", /json/)
       .expect(400);
@@ -84,12 +84,12 @@ describe("Test POST /api/launches", () => {
     });
   });
 });
-describe("Test DELETE /api/launches/:id", () => {
+describe("Test DELETE /v1/launches/:id", () => {
   test("It should respond with 200 if launch aborted successfully", async () => {
     const launchIdToAbort = 100;
 
     const response = await request(app)
-      .delete(`/api/launches/${launchIdToAbort}`)
+      .delete(`/v1/launches/${launchIdToAbort}`)
       .expect("Content-Type", /json/)
       .expect(200);
 
@@ -105,7 +105,7 @@ describe("Test DELETE /api/launches/:id", () => {
     const invalidLaunchId = 9999;
 
     const response = await request(app)
-      .delete(`/api/launches/${invalidLaunchId}`)
+      .delete(`/v1/launches/${invalidLaunchId}`)
       .expect("Content-Type", /json/)
       .expect(400);
 

@@ -3,7 +3,6 @@ const path = require("path");
 const { parse } = require("csv-parse");
 const { AppError } = require("../utils/AppError.utils");
 const planets = require('./planets.mongo');
-const { get } = require("mongoose");
 
 const habitablePlanets = [];
 
@@ -40,7 +39,7 @@ function loadPlanetsData() {
         if (isHabitablePlanet(data))
         {
           //TODO:Replace below creat with insert + update = upsert
-          savePlenets(data);
+          await savePlanets(data);
           //Creat Decument in DB
         }
       })
@@ -61,7 +60,7 @@ function loadPlanetsData() {
     '__v': 0,
   });
 }
-async function savePlenets(planet){
+async function savePlanets(planet){
   try{
           //TODO:Replace below creat with insert + update = upsert
           await planets.updateOne({
@@ -78,7 +77,6 @@ async function savePlenets(planet){
     }
 
 module.exports = {
-  habitablePlanets,
   loadPlanetsData,
   getAllPlanets,
 };
