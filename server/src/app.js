@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const helmet = require("helmet");
 
 const { globalErrorHandler } = require("./utils/errorHandler.utils");
 
@@ -11,6 +12,8 @@ const api = require ("./routes/api");
 dotenv.config();
 
 const app = express();
+//[2] use helmet
+app.use(helmet());
 
 app.use(morgan("dev")); // Logging middleware
 
