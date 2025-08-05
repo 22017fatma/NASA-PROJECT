@@ -5,6 +5,7 @@ async function httpGetAllPlanets(req, res, next) {
   console.log("httpGetAllPlanets");
   try {
     const planets = await getAllPlanets();
+    console.log(" ma planets ",planets)
     if (planets?.length > 0) {
       res.status(200).json({
         status: "success",

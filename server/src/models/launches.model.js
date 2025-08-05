@@ -1,7 +1,7 @@
 const axios = require("axios");
-const launchesDatabase = require('./launches.mongo');
-const planets = require('./planets.mongo');
-
+const launchesDatabase = require("./launches.mongo");
+const planets = require("./planets.mongo");
+const { AppError } = require("../utils/AppError.utils");
 const DEFUALT_FLIGHT_NUMBER = 100;
 const launches = new Map();
 
@@ -31,11 +31,9 @@ async function populateLaunches() {
         ]
     }
 })
-
-
 if(response.status !== 200){
   console.log("problem dawnloading launch data");
-  throw new Error("launch data dawnload failed");
+  throw new AppError("launch data dawnload failed");
 }
   const launchDocs = response.data.docs;
   for (const launchDoc of launchDocs) {

@@ -27,11 +27,11 @@ app.use("/v1",api);
 
 
 
-app.use("*route", (req, _res, _next) => {
-  throw new Error(`Can't find ${req.originalUrl} on this server!`, 404);
-});
+// app.use("*route", (req, _res, _next) => {
+//   throw new Error(`Can't find ${req.originalUrl} on this server!`, 404);
+// });
 
-app.get("/*route", (req, res) => {
+app.get("*route", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
