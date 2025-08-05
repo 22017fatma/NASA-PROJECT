@@ -17,7 +17,7 @@ async function httpGetAllLaunches(req, res) {
   const resD = await getAllLaunches()
   return res.status(200).json({
     data: {
-      launches: resD ,
+      // launches: resD ,
       launches: launchesQ,
 
     },
