@@ -29,5 +29,9 @@ jobs:
           cd client # Change to the frontend directory
           npm run build:linux # Run the frontend build command
 
-      - name: Run tests
-        run: npm test
+      - name: Run backend tests
+        run: npm test test --prefix server
+
+      - name: Run frontend tests
+        run: npm test test --prefix client -- --passWithNoTests
+
