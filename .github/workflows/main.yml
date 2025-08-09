@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     env:
-      MONGO_URL_ONLINE: ${{ secrets.MONGO_URL_ONLINE }}
+      MONGO_URL_ONLINE: ${{secrets.MONGO_URL_ONLINE}}
     strategy:
       matrix: 
         node-version: [ 20.x ]
