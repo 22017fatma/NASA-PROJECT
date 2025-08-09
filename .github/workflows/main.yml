@@ -6,15 +6,20 @@ on:
     branches: [ main ]
 jobs:
   build:
+    env:
+      CI: true
+    strategy:
+      matrix: 
+        node-version: [18.x, 20.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Use Node.js version 20
+      - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install
@@ -23,3 +28,6 @@ jobs:
         run: |
           cd client # Change to the frontend directory
           npm run build:linux # Run the frontend build command
+
+      - name: Run tests
+        run: npm test
