@@ -8,7 +8,8 @@ const helmet = require("helmet");
 
 const { globalErrorHandler } = require("./utils/errorHandler.utils");
 
-const api = require ("./routes/api");
+const api = require("./routes/api");
+const { error } = require("console");
 dotenv.config();
 
 const app = express();
@@ -26,9 +27,7 @@ app.use(
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use("/v1",api);
-
-
+app.use("/v1", api);
 
 // app.use("*route", (req, _res, _next) => {
 //   throw new Error(`Can't find ${req.originalUrl} on this server!`, 404);

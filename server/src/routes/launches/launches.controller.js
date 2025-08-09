@@ -7,25 +7,19 @@ const {
 } = require("../../models/launches.model.js");
 
 const { isValidLaunch } = require("../../../dtos/launches.dtos.js");
-const {
-  getPagination
-} = require("../../services/query.js");
+const { getPagination } = require("../../services/query.js");
 //get launches from DB
 async function httpGetAllLaunches(req, res) {
-  const{ skip , limit } = getPagination( req.query);
+  const { skip, limit } = getPagination(req.query);
   const launchesQ = await getAllLaunches(skip, limit);
   // const resD = await getAllLaunches()
   return res.status(200).json({
     data: {
       // launches: resD ,
       launches: launchesQ,
-
     },
-
-  
   });
 }
-
 
 async function httpAddNewLaunch(req, res) {
   const launch = req.body;
@@ -98,8 +92,8 @@ async function httpAbortLaunch(req, res) {
   });
 }
 
-module.exports = { 
+module.exports = {
   httpGetAllLaunches,
-  httpAddNewLaunch, 
-  httpAbortLaunch 
+  httpAddNewLaunch,
+  httpAbortLaunch,
 };
