@@ -1,12 +1,19 @@
 const { app } = require("../../app.js");
 const request = require("supertest");
 const { connectToMongo, mongoDisconnect } = require("../../services/mongo.js");
+const { loadLaunchData } = require("../../models/launches.model.js");
 
 describe("Launches API", () => {
+  
   beforeAll(async () => {
-    await connectToMongo();
-    await loadPlanetsData();
-    await loadLaunchData();
+    try {
+      await connectToMongo();
+      // await loadPlanetsData();
+      await loadLaunchData();
+    } catch (err) {
+      throw err;
+      
+    }
   }, 60000);
 
   afterAll(async () => {

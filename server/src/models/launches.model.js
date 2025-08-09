@@ -50,7 +50,7 @@ if(response.status !== 200){
       success: launchDoc["success"],
       customers,
     };
-    console.log(`${launch.flightNumber} ${launch.mission}`);
+    // console.log(`${launch.flightNumber} ${launch.mission}`);
     //populate launches collection...
     await saveLuanches(launch);
 }
