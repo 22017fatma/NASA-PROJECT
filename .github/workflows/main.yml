@@ -20,4 +20,6 @@ jobs:
         run: npm install
       
       - name: Build client
-        run: npm run build --prefix client
+        run: |
+          cd client # Change to the frontend directory
+          npm run build:linux # Run the frontend build command
