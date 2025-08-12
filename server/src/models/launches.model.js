@@ -11,49 +11,53 @@ let latestFlightNumber = 100;
 const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query";
 async function populateLaunches() {
   console.log("Dawnloading launch data...");
-  const response = await axios.post(SPACEX_API_URL,{
-    query:{},
-    options:{
-      pagination: false,
-        populate:[
-            {
+  try {
+    const response = await axios.post(SPACEX_API_URL, {
+      query: {},
+      options: {
+        pagination: false,
+        populate: [
+          {
             path: "rocket",
-            select:{
-            name: 1
+            select: {
+              name: 1
             }
-            },
-            {
-              path: "payloads",
-              select: {
+          },
+          {
+            path: "payloads",
+            select: {
               "customer": 1
-              }
             }
+          }
         ]
+      }
+    })
+    if (response.status !== 200) {
+      console.log("problem dawnloading launch data");
+      throw new AppError("launch data dawnload failed");
     }
-})
-if(response.status !== 200){
-  console.log("problem dawnloading launch data");
-  throw new AppError("launch data dawnload failed");
-}
-  const launchDocs = response.data.docs;
-  for (const launchDoc of launchDocs) {
-    const payloads = launchDoc['payloads'];
-    const customers = payloads.flatMap((payload) => {
-      return payload['customers'];
-    });
-    const launch ={
-      flightNumber: launchDoc["flight_number"],
-      mission: launchDoc ["name"],
-      rocket: launchDoc["rocket"]["name"],
-      launchDate: launchDoc["date_local"],
-      upcoming: launchDoc["upcoming"],
-      success: launchDoc["success"],
-      customers,
-    };
-    // console.log(`${launch.flightNumber} ${launch.mission}`);
-    //populate launches collection...
-    await saveLuanches(launch);
-}
+    const launchDocs = response.data.docs;
+    for (const launchDoc of launchDocs) {
+      const payloads = launchDoc['payloads'];
+      const customers = payloads.flatMap((payload) => {
+        return payload['customers'];
+      });
+      const launch = {
+        flightNumber: launchDoc["flight_number"],
+        mission: launchDoc["name"],
+        rocket: launchDoc["rocket"]["name"],
+        launchDate: launchDoc["date_local"],
+        upcoming: launchDoc["upcoming"],
+        success: launchDoc["success"],
+        customers,
+      };
+      // console.log(`${launch.flightNumber} ${launch.mission}`);
+      //populate launches collection...
+      await saveLuanches(launch);
+    }
+  } catch (err) {
+    throw err;
+  }
 }
 
 
