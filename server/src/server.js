@@ -1,6 +1,7 @@
 require("dotenv").config();
 // const http = require("http");
 const https = require("https");
+const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { app } = require("./app");
@@ -11,16 +12,16 @@ console.log("ENVIRONMENT:", process.env.NODE_ENV);
 
 const PORT = process.env.PORT || 8000;
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 //[1]creat https server
-const server = https.createServer(
-  {
-    key: fs.readFileSync(path.join(__dirname, "../cert/key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "../cert/cert.pem")),
-  },
+// const server = https.createServer(
+//   {
+//     key: fs.readFileSync(path.join(__dirname, "../cert/key.pem")),
+//     cert: fs.readFileSync(path.join(__dirname, "../cert/cert.pem")),
+//   },
 
-  app
-);
+//   app
+// );
 
 async function startServer() {
   try {
