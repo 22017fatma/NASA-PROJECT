@@ -24,12 +24,5 @@
     "url": "https://github.com/22017fatma/NASA-PROJECT/issues"
   },
   "homepage": "https://github.com/22017fatma/NASA-PROJECT#readme",
-  "description": "",
-  "dependencies": {
-    "axios": "^1.11.0",
-    "mongodb": "^6.18.0",
-    "mongoose": "^8.16.5",
-    "morgan": "^1.10.1",
-    "pm2": "^6.0.8"
-  }
+  "description": ""
 }

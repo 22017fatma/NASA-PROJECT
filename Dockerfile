@@ -2,6 +2,8 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
+RUN chown -R node:node /app
+
 COPY package*.json ./
 
 COPY client/package*.json client/
@@ -11,7 +13,7 @@ COPY server/package*.json server/
 RUN npm run install-server -- --omit=dev
 
 COPY client/ client/
-RUN npm run build --prefix client
+RUN npm run build:linux --prefix client
 
 COPY server/ server/
 
